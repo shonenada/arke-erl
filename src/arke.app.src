@@ -5,7 +5,8 @@
   {mod, {arke_app, []}},
   {applications,
    [kernel,
-    stdlib
+    stdlib,
+    arke_core
    ]},
   {env,[]},
   {modules, []},
