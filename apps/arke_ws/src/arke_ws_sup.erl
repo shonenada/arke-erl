@@ -1,9 +1,9 @@
 %%%-------------------------------------------------------------------
-%% @doc arke top level supervisor.
+%% @doc arke_ws top level supervisor.
 %% @end
 %%%-------------------------------------------------------------------
 
--module(arke_sup).
+-module(arke_ws_sup).
 
 -behaviour(supervisor).
 
@@ -26,8 +26,8 @@ start_link() ->
 %%                  type => worker(),       % optional
 %%                  modules => modules()}   % optional
 init([]) ->
-    SupFlags = #{strategy => one_for_one,
-                 intensity => 10,
+    SupFlags = #{strategy => one_for_all,
+                 intensity => 0,
                  period => 1},
     ChildSpecs = [],
     {ok, {SupFlags, ChildSpecs}}.

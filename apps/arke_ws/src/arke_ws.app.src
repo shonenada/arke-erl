@@ -1,13 +1,12 @@
-{application, arke,
- [{description, "An OTP application"},
-  {vsn, "0.1.0"},
+{application, arke_ws,
+ [{description, "Websocket service"},
+  {vsn, git},
   {registered, []},
-  {mod, {arke_app, []}},
+  {mod, {arke_ws_app, []}},
   {applications,
    [kernel,
     stdlib,
-    arke_core,
-    arke_ws
+    cowboy
    ]},
   {env,[]},
   {modules, []},
