@@ -1,4 +1,4 @@
--module(arke_ws_ping_handler).
+-module(arke_ws_ping).
 
 -export([init/2]).
 

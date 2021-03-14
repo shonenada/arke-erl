@@ -23,7 +23,8 @@ start_server() ->
     Port = 21314,
     Dispatch = cowboy_router:compile(
                  [{'_',
-                   [{"/ping", arke_ws_ping_handler, #{}}]
+                   [{"/ping", arke_ws_ping, #{}},
+                    {"/s/:service", arke_ws_proxy, #{}} ]
                   }]),
     {ok, _} = cowboy:start_clear(http, [{num_acceptors, 10}, {port, Port}],
                                  #{env => #{dispatch => Dispatch}}).
