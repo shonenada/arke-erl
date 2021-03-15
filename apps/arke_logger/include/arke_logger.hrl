@@ -1,0 +1,33 @@
+-define(LOG(Level, Meta, Fmt, Args), lager:Level(Meta, Fmt, Args)).
+-define(LOG(Level, Fmt, Args), lager:Level(Fmt, Args)).
+-define(LOG(Level, Fmt), lager:Level(Fmt)).
+
+-define(DEBUG(Fmt), ?LOG(debug, Fmt)).
+-define(INFO(Fmt), ?LOG(info, Fmt)).
+-define(NOTICE(Fmt), ?LOG(notice, Fmt)).
+-define(WARNING(Fmt), ?LOG(warning, Fmt)).
+-define(ERROR(Fmt), ?LOG(error, Fmt)).
+-define(CRITICAL(Fmt), ?LOG(critical, Fmt)).
+-define(ALERT(Fmt), ?LOG(alert, Fmt)).
+-define(EMERGENCY(Fmt), ?LOG(emergency, Fmt)).
+-define(NONE(Fmt), ?LOG(none, Fmt)).
+
+-define(DEBUG(Fmt, Args), ?LOG(debug, Fmt, Args)).
+-define(INFO(Fmt, Args), ?LOG(info, Fmt, Args)).
+-define(NOTICE(Fmt, Args), ?LOG(notice, Fmt, Args)).
+-define(WARNING(Fmt, Args), ?LOG(warning, Fmt, Args)).
+-define(ERROR(Fmt, Args), ?LOG(error, Fmt, Args)).
+-define(CRITICAL(Fmt, Args), ?LOG(critical, Fmt, Args)).
+-define(ALERT(Fmt, Args), ?LOG(alert, Fmt, Args)).
+-define(EMERGENCY(Fmt, Args), ?LOG(emergency, Fmt, Args)).
+-define(NONE(Fmt, Args), ?LOG(none, Fmt, Args)).
+
+-define(DEBUG(Meta, Fmt, Args), ?LOG(debug, Meta, Fmt, Args)).
+-define(INFO(Meta, Fmt, Args), ?LOG(info, Meta, Fmt, Args)).
+-define(NOTICE(Meta, Fmt, Args), ?LOG(notice, Meta, Fmt, Args)).
+-define(WARNING(Meta, Fmt, Args), ?LOG(warning, Meta, Fmt, Args)).
+-define(ERROR(Meta, Fmt, Args), ?LOG(error, Meta, Fmt, Args)).
+-define(CRITICAL(Meta, Fmt, Args), ?LOG(critical, Meta, Fmt, Args)).
+-define(ALERT(Meta, Fmt, Args), ?LOG(alert, Meta, Fmt, Args)).
+-define(EMERGENCY(Meta, Fmt, Args), ?LOG(emergency, Meta, Fmt, Args)).
+-define(NONE(Meta, Fmt, Args), ?LOG(none, Meta, Fmt, Args)).
