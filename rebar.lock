@@ -1,5 +1,6 @@
 {"1.2.0",
-[{<<"cowboy">>,
+[{<<"color">>,{pkg,<<"erlang_color">>,<<"1.0.0">>},1},
+ {<<"cowboy">>,
   {git,"git://github.com/ninenines/cowboy.git",
        {ref,"3eec447960eb03cde48f0f04cd72fd4d1e548ca0"}},
   0},
@@ -7,14 +8,27 @@
   {git,"https://github.com/ninenines/cowlib",
        {ref,"1b5539a1da1d39b110d81b118000f00bbedaf4b4"}},
   1},
+ {<<"goldrush">>,{pkg,<<"goldrush">>,<<"0.1.9">>},1},
+ {<<"lager">>,
+  {git,"https://github.com/erlang-lager/lager",
+       {ref,"c5447d2d85a0d446d41a79bffe0a6a66bd50c901"}},
+  0},
  {<<"ranch">>,
   {git,"https://github.com/ninenines/ranch",
        {ref,"3190aef88aea04d6dce8545fe9b4574288903f44"}},
   1},
- {<<"stillir">>,{pkg,<<"stillir">>,<<"1.1.0">>},0}]}.
+ {<<"stillir">>,{pkg,<<"stillir">>,<<"1.1.0">>},0},
+ {<<"stout">>,
+  {git,"https://github.com/eproxus/stout.git",
+       {ref,"3fa9e31933f2e84e10b8f8c7ae0e1ef02478e91e"}},
+  0}]}.
 [
 {pkg_hash,[
+ {<<"color">>, <<"145FE1D2E65C4516E4F03FEFCA6C2F47EBAD5899D978D70382A5CFE643E4AC9E">>},
+ {<<"goldrush">>, <<"F06E5D5F1277DA5C413E84D5A2924174182FB108DABB39D5EC548B27424CD106">>},
  {<<"stillir">>, <<"94A83C3971C9B661C9FDB833563490B55E07CA051CB1AC9023DD0852F6B7CF40">>}]},
 {pkg_hash_ext,[
+ {<<"color">>, <<"6B17E5E589C8FEF540574C9EA32B67CEC2C8A44283AAFE474D6E5818FB3EE038">>},
+ {<<"goldrush">>, <<"99CB4128CFFCB3227581E5D4D803D5413FA643F4EB96523F77D9E6937D994CEB">>},
  {<<"stillir">>, <<"10FB2F8031E1B20A7DF7768C873DF041D4B04D44E975047939631995C2A39CCE">>}]}
 ].
