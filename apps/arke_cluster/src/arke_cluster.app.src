@@ -6,7 +6,8 @@
   {applications,
    [kernel,
     stdlib,
-    arke_config
+    arke_config,
+    arke_logger
    ]},
   {env,[]},
   {modules, []},

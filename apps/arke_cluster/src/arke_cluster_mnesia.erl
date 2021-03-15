@@ -1,5 +1,7 @@
 -module(arke_cluster_mnesia).
 
+-include("arke_cluster.hrl").
+
 -export([start_new/0, join/1, ensure_started/0]).
 
 -define(TIMEOUT, 3000).
@@ -28,9 +30,11 @@ ensure_started() ->
     Nodes = lists:map(fun(E) -> binary_to_atom(E, utf8) end, re:split(RawNode, ",")),
     case get_acrive_node(Nodes -- [node()]) of
         {ok, Node} ->
+            ?INFO("join cluster"),
             join(Node),
             {ok, Node};
         {error, empty} ->
+            ?INFO("start new cluster"),
             start_new(),
             {ok, new}
     end.
