@@ -1,3 +1,4 @@
+{"1.2.0",
 [{<<"cowboy">>,
   {git,"git://github.com/ninenines/cowboy.git",
        {ref,"3eec447960eb03cde48f0f04cd72fd4d1e548ca0"}},
@@ -9,4 +10,11 @@
  {<<"ranch">>,
   {git,"https://github.com/ninenines/ranch",
        {ref,"3190aef88aea04d6dce8545fe9b4574288903f44"}},
-  1}].
+  1},
+ {<<"stillir">>,{pkg,<<"stillir">>,<<"1.1.0">>},0}]}.
+[
+{pkg_hash,[
+ {<<"stillir">>, <<"94A83C3971C9B661C9FDB833563490B55E07CA051CB1AC9023DD0852F6B7CF40">>}]},
+{pkg_hash_ext,[
+ {<<"stillir">>, <<"10FB2F8031E1B20A7DF7768C873DF041D4B04D44E975047939631995C2A39CCE">>}]}
+].
