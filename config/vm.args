@@ -1,6 +1,8 @@
--sname arke
+-sname arke@127.0.0.1
 
 -setcookie arke_cookie
 
 +K true
 +A30
+
+-mnesia -d 'arke_data'
