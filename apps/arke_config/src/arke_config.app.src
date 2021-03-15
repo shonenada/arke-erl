@@ -1,14 +1,11 @@
-{application, arke,
+{application, arke_config,
  [{description, "An OTP application"},
   {vsn, "0.1.0"},
   {registered, []},
-  {mod, {arke_app, []}},
+  {mod, {arke_config_app, []}},
   {applications,
    [kernel,
-    stdlib,
-    arke_core,
-    arke_ws,
-    arke_config
+    stdlib
    ]},
   {env,[]},
   {modules, []},
