@@ -24,15 +24,19 @@ websocket_init(_State) ->
 
 websocket_handle({text, Data} = _Frame, #state{upstream = Upstream} = State) ->
     {Host, Port} = Upstream,
-    {ok, Socket} = gen_tcp:connect(Host, Port, [binary, {mode, binary}, {packet, 0} ]),
-    ok = gen_tcp:send(Socket, <<Data/binary, <<"\n">>/binary>>),
-    do_recv(Socket),
+    {ok, Socket} = gen_tcp:connect(Host, Port, [binary, {mode, binary}]),
+    ok = gen_tcp:send(Socket, <<Data/binary, <<"\n\n">>/binary>>),  %% FIXME
+    do_recv_text(Socket),
+    gen_tcp:close(Socket),
     {ok, State}.
 
-websocket_info({data, Data}, State) ->
-    {reply, Data, State};
+websocket_info({text_data, Data}, State) ->
+    {reply, {text, Data}, State};
 websocket_info({'DOWN', _, process, _Pid, _}, _State) ->
-    {stop, _State}.
+    {stop, _State};
+websocket_info(_Raw, State) ->
+    io:format("info: ~p~n", [_Raw]),
+    {ok, State}.
 
 terminate(Reason, _Req, _State) ->
     io:format("~p~n", [Reason]),
@@ -46,9 +50,9 @@ find_upstream(Stream) ->
             {error, not_found}
     end.
 
-do_recv(Socket) ->
+do_recv_text(Socket) ->
     receive
         {tcp, Socket, Data} ->
-            gen_server:cast(self(), {data, Data}),
+            self() ! {text_data, Data},
             gen_tcp:close(Socket)
     end.
