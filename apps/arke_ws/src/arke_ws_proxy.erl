@@ -9,14 +9,21 @@
           upstream :: tuple()
          }).
 
-init(Req, _Opts) ->
+init(Req, Opts) ->
     Service = cowboy_req:binding(service, Req),
-    {ok, Upstream} = find_upstream(Service),
-    {cowboy_websocket, Req,
-     #state{
-        service = Service,
-        upstream = Upstream
-       }}.
+    case find_upstream(Service) of
+        {ok, Upstream} ->
+            {cowboy_websocket, Req,
+             #state{
+                service = Service,
+                upstream = Upstream
+           }};
+        {error, not_found} ->
+            StatusCode = 404,
+            Headers = #{<<"Content-Type">> => <<"plain/text">>},
+            Body = <<"Not Found">>,
+            {ok, cowboy_req:reply(StatusCode, Headers, Body, Req), Opts}
+    end.
 
 websocket_init(_State) ->
     process_flag(trap_exit, true),
