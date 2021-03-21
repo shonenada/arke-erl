@@ -31,13 +31,20 @@ websocket_init(_State) ->
 
 websocket_handle({text, Data} = _Frame, #state{upstream = Upstream} = State) ->
     {Host, Port} = Upstream,
-    {ok, Socket} = gen_tcp:connect(Host, Port, [binary, {mode, binary}]),
-    ok = gen_tcp:send(Socket, <<Data/binary, <<"\n\n">>/binary>>),  %% FIXME
-    do_recv_text(Socket),
+    {ok, Socket} = gen_tcp:connect(Host, Port, [{active, false}]),
+    ok = gen_tcp:send(Socket, <<Data/binary, <<"\r\n\r\n">>/binary>>),  %% FIXME
+    {ok, B} =  do_recv(Socket, []),
+    self() ! {text_data, B},
     gen_tcp:close(Socket),
+    {ok, State};
+websocket_handle(_Frame, State) ->
     {ok, State}.
 
 websocket_info({text_data, Data}, State) ->
+    io:format("text: ~p~n", [Data]),
+    {reply, {text, Data}, State};
+websocket_info({tcp, _From, Data}, State) ->
+    io:format("tcp: ~p~p~n", [_From, Data]),
     {reply, {text, Data}, State};
 websocket_info({'DOWN', _, process, _Pid, _}, _State) ->
     {stop, _State};
@@ -51,15 +58,16 @@ terminate(Reason, _Req, _State) ->
 
 find_upstream(Stream) ->
     case Stream of
-        <<"nginx">> ->
+        <<"echo">> ->
             {ok, {"localhost", 1234}};
          _ ->
             {error, not_found}
     end.
 
-do_recv_text(Socket) ->
-    receive
-        {tcp, Socket, Data} ->
-            self() ! {text_data, Data},
-            gen_tcp:close(Socket)
+do_recv(Sock, Bs) ->
+    case gen_tcp:recv(Sock, 0) of
+        {ok, B} ->
+            do_recv(Sock, [Bs, B]);
+        {error, closed} ->
+            {ok, list_to_binary(Bs)}
     end.
